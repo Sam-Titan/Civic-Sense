@@ -32,6 +32,15 @@ async function loadProfile() {
 
     } catch (err) {
         console.error("Failed to load profile:", err);
+        
+        // The Fix: Update the text fields to show an error state
+        document.getElementById("user-name").textContent = "Error loading profile";
+        
+        const addressField = document.getElementById("complaint-address");
+        if (addressField) {
+            addressField.value = "Error loading address";
+            // Optional: addressField.disabled = true; 
+        }
     }
 }
 
