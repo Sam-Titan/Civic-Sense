@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #F4F6F8;
+    color: #1A1A1A;
+    min-height: 100vh;
+}
+
+/* Layout */
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+.card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Typography */
+h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+p  { font-size: 14px; color: #555; margin-bottom: 12px; }
+
+/* Form elements */
+label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+    display: block;
+    margin-bottom: 4px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #DDE1E7;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 14px;
+    outline: none;
+    transition: border 0.2s;
+    background: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #185FA5;
+}
+
+input:disabled {
+    background: #F4F6F8;
+    color: #888;
+}
+
+textarea { height: 80px; resize: none; }
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-bottom: 8px;
+}
+
+.btn:hover { opacity: 0.88; }
+.btn-primary { background: #185FA5; color: #fff; }
+.btn-secondary {
+    background: #fff;
+    color: #185FA5;
+    border: 1px solid #185FA5;
+}
+.btn-danger {
+    background: #fff;
+    color: #A32D2D;
+    border: 1px solid #A32D2D;
+}
+
+/* Status badges */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 99px;
+}
+
+.badge-pending      { background: #FAEEDA; color: #854F0B; }
+.badge-acknowledged { background: #E6F1FB; color: #185FA5; }
+.badge-resolved     { background: #EAF3DE; color: #3B6D11; }
+
+/* Messages */
+.msg {
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: none;
+}
+
+.msg-error   { background: #FCEBEB; color: #A32D2D; }
+.msg-success { background: #EAF3DE; color: #3B6D11; }
+
+/* Topbar */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: #fff;
+    border-bottom: 1px solid #DDE1E7;
+    margin-bottom: 20px;
+}
+
+.topbar-brand {
+    font-size: 16px;
+    font-weight: 600;
+    color: #185FA5;
+}
+
+.topbar-role {
+    font-size: 12px;
+    color: #555;
+    background: #F4F6F8;
+    border: 1px solid #DDE1E7;
+    border-radius: 99px;
+    padding: 3px 10px;
+}
+
+/* Complaint items */
+.complaint-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #DDE1E7;
+}
+
+.complaint-item:last-child {
+    border-bottom: none;
+}
+
+.complaint-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.complaint-date {
+    font-size: 12px;
+    color: #555;
+}
+
+.complaint-desc {
+    font-size: 14px;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+}
+
+.complaint-meta {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+/* Divider */
+.divider {
+    border: none;
+    border-top: 1px solid #DDE1E7;
+    margin: 16px 0;
+}
+
+/* Stats grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.stat-box {
+    background: #F4F6F8;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1A1A1A;
+}
+
+.stat-value.amber { color: #854F0B; }
+.stat-value.blue  { color: #185FA5; }
+.stat-value.green { color: #3B6D11; }
+
+.stat-label {
+    font-size: 11px;
+    color: #555;
+    margin-top: 2px;
+}
