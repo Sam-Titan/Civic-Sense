@@ -1,4 +1,3 @@
-const API = "http://localhost:8000";
 
 // --- Page guard ---
 const role = localStorage.getItem("role");
@@ -100,6 +99,12 @@ async function loadComplaints() {
 
     } catch (err) {
         console.error("Failed to load complaints:", err);
+        
+        // The Fix: Target the list container and show an error message
+        const list = document.getElementById("complaints-list");
+        if (list) {
+            list.innerHTML = "<p style='color: red;'>Failed to load complaints. Please refresh or try again later.</p>";
+        }
     }
 }
 

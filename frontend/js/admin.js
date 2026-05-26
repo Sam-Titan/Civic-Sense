@@ -1,5 +1,3 @@
-const API = "http://localhost:8000";
-
 // --- Page guard ---
 const role = localStorage.getItem("role");
 if (!role || role !== "rwa_admin") {
