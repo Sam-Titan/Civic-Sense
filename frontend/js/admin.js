@@ -1,21 +1,20 @@
-const API = "http://localhost:8000";
-
-// --- Page guard ---
+// --- Page guard (only enforce on admin.html) ---
 const role = localStorage.getItem("role");
-if (!role || role !== "rwa_admin") {
+if (window.location.pathname.includes("admin.html") && (!role || role !== "rwa_admin")) {
     window.location.href = "index.html";
 }
 
 
 // --- Load page on start ---
 document.addEventListener("DOMContentLoaded", () => {
-    loadComplaints();
-    loadWhitelist();
+    if (document.getElementById("all-complaints-list")) loadAllComplaints();
+    if (document.getElementById("complaints-list")) loadComplaints();
+    if (document.getElementById("whitelist-list")) loadWhitelist();
 });
 
 
-// --- Load all complaints ---
-async function loadComplaints() {
+// --- Load all complaints (admin view) ---
+async function loadAllComplaints() {
     try {
         const res = await fetch(`${API}/admin/complaints`, {
             credentials: "include"
@@ -40,7 +39,7 @@ async function loadComplaints() {
         document.getElementById("stat-acknowledged").textContent =
             complaints.filter(c => c.status === "Acknowledged").length;
 
-        const list = document.getElementById("complaints-list");
+        const list = document.getElementById("all-complaints-list");
 
         if (complaints.length === 0) {
             list.innerHTML = "<p>No complaints yet.</p>";
@@ -96,7 +95,7 @@ async function loadComplaints() {
         `).join("");
 
     } catch (err) {
-        console.error("Failed to load complaints:", err);
+        console.error("Failed to load all complaints:", err);
     }
 }
 
@@ -120,7 +119,7 @@ window.acknowledgeComplaint = async function (complaintId) {
         });
 
         if (res.ok) {
-            loadComplaints();
+            loadAllComplaints();
         } else {
             const data = await res.json();
             alert(data.detail || "Could not acknowledge complaint.");
@@ -153,7 +152,7 @@ window.addRemark = async function (complaintId) {
         });
 
         if (res.ok) {
-            loadComplaints();
+            loadAllComplaints();
         } else {
             const data = await res.json();
             alert(data.detail || "Could not save remark.");
@@ -181,8 +180,8 @@ async function loadWhitelist() {
         }
 
         list.innerHTML = entries.map(e => `
-            <div style="display:flex; align-items:center; 
-                gap:8px; padding:8px 0; 
+            <div style="display:flex; align-items:center;
+                gap:8px; padding:8px 0;
                 border-bottom:1px solid #DDE1E7;">
                 <span style="flex:1; font-size:13px;">
                     ${e.phone_number}
@@ -192,7 +191,7 @@ async function loadWhitelist() {
                 </span>
                 ${e.is_active ? `
                     <button class="btn btn-danger"
-                        style="width:auto; padding:4px 10px; 
+                        style="width:auto; padding:4px 10px;
                             margin:0; font-size:11px;"
                         onclick="removeFromWhitelist('${e.phone_number}')">
                         Remove
@@ -223,7 +222,6 @@ window.addToWhitelist = async function () {
 
     const phone = "+91" + digits;
 
-    // Get admin name from profile
     let adminName = "RWA Admin";
     try {
         const profileRes = await fetch(`${API}/users/me`, {
@@ -287,15 +285,3 @@ window.removeFromWhitelist = async function (phone) {
         alert("Could not reach server. Please try again.");
     }
 };
-
-
-// --- Format date ---
-function formatDate(timestamp) {
-    if (!timestamp) return "—";
-    const date = new Date(timestamp);
-    return date.toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric"
-    });
-}

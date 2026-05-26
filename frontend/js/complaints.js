@@ -1,5 +1,3 @@
-const API = "http://localhost:8000";
-
 // --- Page guard ---
 const role = localStorage.getItem("role");
 if (!role) {
@@ -103,6 +101,22 @@ async function loadComplaints() {
     }
 }
 
+// At the end of loadComplaints(), add:
+if (role === "rwa_admin") {
+    loadAllComplaints();
+}
+
+// New function:
+async function loadAllComplaints() {
+    const res = await fetch(`${API}/admin/complaints`, { credentials: "include" });
+    const complaints = await res.json();
+
+    document.getElementById("stat-total").textContent = complaints.length;
+    document.getElementById("stat-pending").textContent = complaints.filter(c => c.status === "Pending").length;
+    document.getElementById("stat-acknowledged").textContent = complaints.filter(c => c.status === "Acknowledged").length;
+
+    document.getElementById("all-complaints-list").innerHTML = complaints.map(c => `...same admin card HTML as before...`).join("");
+}
 
 // --- File a new complaint ---
 window.fileComplaint = async function () {

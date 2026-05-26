@@ -13,7 +13,14 @@
     <span class="topbar-brand">CivicCollect</span>
     <div style="display:flex; align-items:center; gap:10px;">
         <span class="topbar-role" id="user-name">Loading...</span>
-        <button class="btn btn-secondary" 
+
+        <!-- Whitelist link for admin only -->
+        <a id="whitelist-link" href="admin.html"
+            style="display:none; font-size:12px; color:#185FA5; text-decoration:none;">
+            Manage Whitelist
+        </a>
+
+        <button class="btn btn-secondary"
             style="width:auto; padding:4px 12px; margin:0; font-size:12px;"
             onclick="logout()">
             Sign out
@@ -23,7 +30,39 @@
 
 <div class="container">
 
-    <!-- New complaint form -->
+    <!-- Admin-only: Stats + All complaints -->
+    <div id="admin-section" style="display:none;">
+
+        <!-- Stats -->
+        <div class="card">
+            <h2>Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="stat-total">—</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value amber" id="stat-pending">—</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value blue" id="stat-acknowledged">—</div>
+                    <div class="stat-label">Acknowledged</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All complaints -->
+        <div class="card">
+            <h2>All complaints</h2>
+            <div id="all-complaints-list">
+                <p>Loading...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- New complaint form (hidden if open complaint exists) -->
     <div class="card" id="complaint-form-card">
         <h2>Report missed collection</h2>
         <div class="msg msg-error" id="form-error"></div>
@@ -33,7 +72,7 @@
         <input type="text" id="complaint-address" disabled>
 
         <label>Description</label>
-        <textarea id="complaint-desc" 
+        <textarea id="complaint-desc"
             placeholder="Describe the issue. When was the last collection? How many days has it been missed?">
         </textarea>
 
@@ -42,7 +81,7 @@
         </button>
     </div>
 
-    <!-- Complaint history -->
+    <!-- My complaints -->
     <div class="card">
         <h2>My complaints</h2>
         <div id="complaints-list">
@@ -54,5 +93,16 @@
 
 <script src="js/auth.js"></script>
 <script src="js/complaints.js"></script>
+<script src="js/admin.js"></script>
+
+<script>
+    // Show admin UI elements if role is rwa_admin
+    const currentRole = localStorage.getItem("role");
+    if (currentRole === "rwa_admin") {
+        document.getElementById("admin-section").style.display = "block";
+        document.getElementById("whitelist-link").style.display = "inline";
+    }
+</script>
+
 </body>
 </html>

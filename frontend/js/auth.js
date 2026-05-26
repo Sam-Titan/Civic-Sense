@@ -102,16 +102,9 @@ window.registerUser = async function () {
     }
 };
 
-
-// --- Redirect by role ---
 function redirectByRole(role) {
-    if (role === "rwa_admin") {
-        window.location.href = "admin.html";
-    } else {
-        window.location.href = "dashboard.html";
-    }
+    window.location.href = "dashboard.html";  // same for both roles
 }
-
 
 // --- Logout (called from dashboard and admin pages) ---
 window.logout = async function () {

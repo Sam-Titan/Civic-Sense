@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CivicCollect — Admin</title>
+    <title>CivicCollect — Whitelist</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -13,6 +13,10 @@
     <span class="topbar-brand">CivicCollect</span>
     <div style="display:flex; align-items:center; gap:10px;">
         <span class="topbar-role">RWA Admin</span>
+        <a href="dashboard.html"
+            style="font-size:12px; color:#185FA5; text-decoration:none;">
+            Dashboard
+        </a>
         <button class="btn btn-secondary"
             style="width:auto; padding:4px 12px; margin:0; font-size:12px;"
             onclick="logout()">
@@ -23,33 +27,6 @@
 
 <div class="container">
 
-    <!-- Stats -->
-    <div class="card">
-        <h2>Overview</h2>
-        <div class="stats-grid">
-            <div class="stat-box">
-                <div class="stat-value" id="stat-total">—</div>
-                <div class="stat-label">Total</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-value amber" id="stat-pending">—</div>
-                <div class="stat-label">Pending</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-value blue" id="stat-acknowledged">—</div>
-                <div class="stat-label">Acknowledged</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- All complaints -->
-    <div class="card">
-        <h2>All complaints</h2>
-        <div id="complaints-list">
-            <p>Loading...</p>
-        </div>
-    </div>
-
     <!-- Whitelist management -->
     <div class="card">
         <h2>Whitelist management</h2>
@@ -58,7 +35,8 @@
 
         <label>Phone number</label>
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
-            <div style="padding:10px 12px; background:#F4F6F8; border:1px solid #DDE1E7; border-radius:8px; font-size:14px; color:#555; white-space:nowrap;">
+            <div style="padding:10px 12px; background:#F4F6F8; border:1px solid #DDE1E7;
+                border-radius:8px; font-size:14px; color:#555; white-space:nowrap;">
                 +91
             </div>
             <input type="tel" id="whitelist-phone"
@@ -83,5 +61,6 @@
 
 <script src="js/auth.js"></script>
 <script src="js/admin.js"></script>
+
 </body>
 </html>
