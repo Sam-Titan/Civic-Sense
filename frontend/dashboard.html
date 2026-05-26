@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicCollect — Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+    <span class="topbar-brand">CivicCollect</span>
+    <div style="display:flex; align-items:center; gap:10px;">
+        <span class="topbar-role" id="user-name">Loading...</span>
+        <button class="btn btn-secondary" 
+            style="width:auto; padding:4px 12px; margin:0; font-size:12px;"
+            onclick="logout()">
+            Sign out
+        </button>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- New complaint form -->
+    <div class="card" id="complaint-form-card">
+        <h2>Report missed collection</h2>
+        <div class="msg msg-error" id="form-error"></div>
+        <div class="msg msg-success" id="form-success"></div>
+
+        <label>Address</label>
+        <input type="text" id="complaint-address" disabled>
+
+        <label>Description</label>
+        <textarea id="complaint-desc" 
+            placeholder="Describe the issue. When was the last collection? How many days has it been missed?">
+        </textarea>
+
+        <button class="btn btn-primary" onclick="fileComplaint()">
+            Submit complaint
+        </button>
+    </div>
+
+    <!-- Complaint history -->
+    <div class="card">
+        <h2>My complaints</h2>
+        <div id="complaints-list">
+            <p>Loading...</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/complaints.js"></script>
+</body>
+</html>
