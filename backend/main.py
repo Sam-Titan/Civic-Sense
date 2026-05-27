@@ -39,4 +39,4 @@ async def root():
 # Works both locally and on Render
 FRONTEND_DIR = os.path.join(os.path.dirname(__file__), "../frontend")
 
-app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
