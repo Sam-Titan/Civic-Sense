@@ -1,3 +1,4 @@
+const API = window.location.origin;
 
 // --- Page guard ---
 const role = localStorage.getItem("role");
