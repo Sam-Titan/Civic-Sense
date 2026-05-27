@@ -51,13 +51,16 @@ async def login(data: LoginRequest, response: Response):
     })
     redis_client.setex(f"session:{session_id}", SESSION_TTL, session_data)
 
-    # Set session cookie on browser
+    IS_PRODUCTION = os.getenv("ENV") == "production"
+
     response.set_cookie(
         key="session_id",
         value=session_id,
-        httponly=True,      # JS cannot read this cookie
-        samesite="lax",     # CSRF protection
-        max_age=SESSION_TTL
+        httponly=True,
+        samesite="none" if IS_PRODUCTION else "lax",
+        secure=IS_PRODUCTION,
+        max_age=SESSION_TTL,
+        path="/"
     )
 
     return {
